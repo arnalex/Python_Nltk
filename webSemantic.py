@@ -28,21 +28,28 @@ def extractor(URL):
     file.write(data.encode('UTF-8'))
     file.close()
 
+    #Scinde la contenu en phrase
+    with open('data.txt', 'r') as f:
+        s = f.read()
+        sentences = s.split('.')
+
+    #Liste de mot vide
+    w=[]
+
+    #Scinde les phrase en mots
+    for sentence in sentences :
+        w.extend(sentence.split(' '))
+
+    print w
+
+    #Retourne la liste de Mot
+    return w
+    
 #Appel de la fonction d'extraction du contenu
 extractor(URL)
 
 #NLP en 5 étapes :
 def nlp():
-    #EOS Detection --> Scinde le texte en phrases
-    txt = exctractor.getText()
-    sentences = nltk.tokenize.sent_tokenize(txt)
-
-    print sentences
-
-    # Download nltk packages used in this example
-    BLOG_DATA = "/Users/amaurygrillr/Documents/EISTI/ING3/Python/project/content.json"
-    blog_data = json.loads(open(BLOG_DATA).read())
-
     #Customize your list of stopwords as needed. Here, we add common
     # punctuation and contraction artifacts.
     stop_words = nltk.corpus.stopwords.words('english') + [
